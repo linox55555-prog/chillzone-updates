@@ -36,6 +36,18 @@ Die Launcher lesen immer
 6. **Online nachprüfen:** `release.json` über die `latest`-URL und das ZIP über HTTPS herunterladen und vergleichen:
    SHA256 und Größe des ZIP gleich `ZipSha256`/`ZipSize`, die heruntergeladene `release.json` gleich der lokalen.
 
+## Mehrere Updates / Versionen überspringen
+
+Der Launcher wendet **nur das neueste `release.json`** an. Wer Versionen überspringt (z. B. 0.5.0 → 0.5.3), bekommt nur die Removals der neuesten Version.
+
+- **Removals sind kumulativ.** Jede neue `release.json` muss alle Removals aller früheren Releases weiterführen, solange die alte Datei
+  bei jemandem noch liegen könnte. Ausnahme: Die Datei ist in der neuen Version wieder unter **gleichem Pfad** in `Files` enthalten.
+  Der Builder übernimmt die Removals früherer Releases automatisch (per `gh` aus allen Releases, sonst aus `latest`),
+  das Prüfskript meldet fehlende.
+- **Immer nur EINE KI baut und veröffentlicht.** Vorher mit `gh release list -R linox55555-prog/chillzone-updates` die aktuelle Version prüfen.
+  Die neue Version muss höher sein.
+- **Keine Releases ersetzen oder löschen.**
+
 ## Regeln
 
 - Nie fremde ARR/NC/Polyform-Mods oder -Packs ins ZIP oder in dieses Repo. Fremde Dateien kommen nur per Modrinth-`Url`.
